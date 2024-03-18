@@ -44,7 +44,7 @@ class RetrieveUpdateNotesView(APIView):
 class RetrieveSubstringView(APIView):
     
     def get(self, request):
-        substring = request.query_params.get('substring')
-        notes = Notes.objects.filter(title__icontains=substring)
+        title = request.query_params.get('title')
+        notes = Notes.objects.filter(title__icontains=title)
         serializer = NotesSerializers(notes, many=True)
         return Response({'success':True, 'data':serializer.data}, status=status.HTTP_200_OK)
